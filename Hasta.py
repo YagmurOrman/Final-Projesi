@@ -48,6 +48,9 @@ class Hasta():
     def get_tedavi(self):
         return self.__tedavi
     
+    def __str__(self):
+        return f"Hasta No: {self.get_hasta_no()} Ad: {self.get_ad()} Soyad: {self.get_soyad()} Doğum Tarihi: {self.get_dogum_tarihi()} Hastalık: {self.get_hastalik()} Tedavi: {self.get_tedavi()}"
+    
 
     def tedavi_suresi(self):
         print("Sizden istenecek tarihleri 28.11.2022 örneğindeki gibi yazınız")
