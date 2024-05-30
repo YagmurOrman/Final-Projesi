@@ -52,32 +52,32 @@ class Hasta():
         return f"Hasta No: {self.get_hasta_no()} Ad: {self.get_ad()} Soyad: {self.get_soyad()} Doğum Tarihi: {self.get_dogum_tarihi()} Hastalık: {self.get_hastalik()} Tedavi: {self.get_tedavi()}"
     
 
-    def tedavi_suresi(self):
-        print("Sizden istenecek tarihleri 28.11.2022 örneğindeki gibi yazınız")
+    def tedavi_suresi(self, tedavi, hastalik):
+        tedavi_sure_sayaci=0
+        bir_kez_dondur=1
         try:
-            giris_tarihi=input("Hastanın Hastaneye Giriş Tarihi:").strip().split(".")
-            cıkıs_tarihi=input("Hastanın Hastaneden Çıkış Tarihi:").strip().split(".")
+            while bir_kez_dondur==1:
+                if hastalik=="Bulaşıcı Hastalık":
+                    tedavi_sure_sayaci=tedavi_sure_sayaci+4
+                elif hastalik=="Cilt Hastalığı":
+                    tedavi_sure_sayaci=tedavi_sure_sayaci+14
+                elif hastalik=="Akut Hastalığı":
+                    tedavi_sure_sayaci=tedavi_sure_sayaci+7
 
-            if int(giris_tarihi[1])==int(cıkıs_tarihi[1]):
-                gunler_arasinda_fark=int(cıkıs_tarihi[0])-int(giris_tarihi[0])
-                if int(cıkıs_tarihi[2])==int(giris_tarihi[2]):
-                    print(f"Hatanın tedavi süresi {gunler_arasinda_fark} gündür")
-                else:
-                    yıllar_arasi_fark=int(cıkıs_tarihi[2])-int(giris_tarihi[2])
-                    print(f"Hatanın tedavi süresi {yıllar_arasi_fark} yıl, 0 ay , {gunler_arasinda_fark} gündür")
-
+                bir_kez_dondur=bir_kez_dondur+1
             
-            else:
-                if int(cıkıs_tarihi[1])>=int(giris_tarihi[1]):
-                    yıllar_arasi_fark=int(cıkıs_tarihi[2])-int(giris_tarihi[2])
-                    aylar_arasi_fark=int(cıkıs_tarihi[1])-int(giris_tarihi[1])
-                    gunler_arasinda_fark=int(cıkıs_tarihi[0])-int(giris_tarihi[0])
-                    print(f"Hastanın tedavi süresi {yıllar_arasi_fark} yıl, {aylar_arasi_fark} ay , {gunler_arasinda_fark} gündür")
-                elif int(cıkıs_tarihi[0])>=int(giris_tarihi[0]):
-                    yıllar_arasi_fark=int(cıkıs_tarihi[2])-int(giris_tarihi[2])
-                    aylar_arasi_fark=int(giris_tarihi[1])-int[cıkıs_tarihi[1]]
-                    gunler_arasinda_fark=int(cıkıs_tarihi[0])-int(giris_tarihi[0])
+            if tedavi=="Özel Tedavi":
+                tedavi_sure_sayaci=tedavi_sure_sayaci+10
+            
+            if tedavi=="Normal Tedavi":
+                tedavi_sure_sayaci=tedavi_sure_sayaci+2
+        except Exception as e:
+            print("Tedavi süresi hesaplanırken bir hata oluştu", e)
 
-        except ValueError:
-            print("Geçersiz tarih formatı! Lütfen tarihleri doğru formatta girin.")
+
+
+
+
+
+        
                     
