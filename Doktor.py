@@ -32,8 +32,9 @@ class Doktor(Personel.Personel):
 
     def maas_artirir(self):
         maas_arttirma_orani=25
-        yeni_maas=self.get.__maas*(1+maas_arttirma_orani/100)
+        yeni_maas=int(self.get_maas())*(1+maas_arttirma_orani/100)
+        return yeni_maas
 
     
     def __str__(self):
-        return f"{super().__str__()}, Uzmanlık: {self.__uzmanlik}, Deneyim Yılı: {self.__deneyim_yili}, Hastane: {self.__hastane}"
+        return f"{super().__str__()}, Uzmanlık: {self.__uzmanlik}, Deneyim Yılı: {self.__deneyim_yili}, Hastane: {self.__hastane},  Maaş artışı sonucu oluşan maaş: {self.maas_artirir()}"

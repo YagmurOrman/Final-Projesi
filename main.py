@@ -1,9 +1,19 @@
 import pandas as pd
 import numpy as np
+from collections import Counter
 import Personel
 import Hasta
 import Hemsire
 import Doktor
+
+#BİR SONRAKİ DÜZENLEMEDE TRY EXCEPT YAPILARI EKLENECEK
+
+
+print("\n")
+
+print('\033[1m' + 'Sağlık Personeli Yönetim Sistemi' + '\033[0m')
+
+print("\n \n ")
 
 personel=Personel.Personel("788", "Ekin" , "Sözüçetin", "Temizlik Personeli", "4000")
 print(str(personel))
@@ -11,7 +21,7 @@ print(str(personel))
 personel1=Personel.Personel("752", "Sevgi", "Ural", "Kat Sekreteri",  "4350")
 print(str(personel1))
 
-doktor=Doktor.Doktor("5247", "İlker Batı", "Cambaz", "Cerrahi", "28000", "Kalp Damar", "12", "Yıldız Özel Hastanesi")
+doktor=Doktor.Doktor("5247", "Taner Batı", "Cambaz", "Cerrahi", "28000", "Kalp Damar", "12", "Yıldız Özel Hastanesi")
 print(str(doktor))
 
 doktor1=Doktor.Doktor("5786", "Selinay", "Doğan", "Dermatoloji", "18750", "Dermatoloji"," 3 ", "Devlet Hastanesi")
@@ -32,7 +42,7 @@ print(str(hemsire2))
 hasta=Hasta.Hasta("6602","Gökalp", "Kandemir", "26.02.1998", "Bulaşıcı Hastalık", "Normal Tedavi")
 print(str(hasta))
 
-hasta1=Hasta.Hasta("6500", "Çağrı Tuna", "Naldöken", "23.11.2011", "Cilt Hastalığı ", "Özel Tedavi")
+hasta1=Hasta.Hasta("6500", "Okan Tuna", "Naldöken", "23.11.2011", "Cilt Hastalığı", "Özel Tedavi")
 print(str(hasta1))
 
 hasta2=Hasta.Hasta("6248", "Mutlu Savaş", "Dümen", "12.07.1955", "Akut Hastalık", "Normal Tedavi")
@@ -54,7 +64,7 @@ kisisel_veriler = {
     "Departman": [personel.get_departman(), personel1.get_departman(), doktor.get_departman(), doktor1.get_departman(), doktor2.get_departman(),
                   hemsire.get_departman(), hemsire1.get_departman(), hemsire2.get_departman(), np.nan, np.nan, np.nan],
 
-    "Maas":[personel.get_maas(), personel1.get_maas(), doktor.get_maas(), doktor1.get_maas(), doktor2.get_maas(), hemsire.get_maas(),
+    "Maaş":[personel.get_maas(), personel1.get_maas(), doktor.get_maas(), doktor1.get_maas(), doktor2.get_maas(), hemsire.get_maas(),
              hemsire1.get_maas(), hemsire2.get_maas(), np.nan , np.nan , np.nan ],
 
     "Hastane":[np.nan, np.nan, doktor.get_hastane(), doktor1.get_hastane(), doktor2.get_hastane(), hemsire.get_hastane(), hemsire1.get_hastane(),
@@ -68,9 +78,12 @@ kisisel_veriler = {
 
     "Deneyim Yılı":[np.nan,  np.nan, doktor.get_deneyim_yili(), doktor1.get_deneyim_yili(), doktor2.get_deneyim_yili(), np.nan, np.nan, np.nan,np.nan, np.nan, np.nan],
 
+    "Doğum Tarihi":[np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan, hasta.get_dogum_tarihi(), hasta1.get_dogum_tarihi(), hasta2.get_dogum_tarihi()],
+
     "Hastalik":[np.nan,  np.nan, np.nan, np.nan ,np.nan ,np.nan , np.nan, np.nan,hasta.get_hastalik(), hasta1.get_hastalik(), hasta2.get_hastalik()],
 
     "Tedavi":[np.nan,  np.nan, np.nan, np.nan ,np.nan ,np.nan , np.nan, np.nan, hasta.get_tedavi(), hasta1.get_tedavi(), hasta2.get_tedavi()]
+
 }
 
 try:
@@ -78,3 +91,76 @@ try:
     print(yapi)
 except Exception as e:
     print("DataFrame oluşturulurken bir hata oluştu:", e)
+
+uzmanlik_sayisi_bulma = {}
+
+for index, row in yapi.iterrows():
+    if row['Uzmanlık'] != 0:
+        uzmanlik = row['Uzmanlık']
+        if uzmanlik in uzmanlik_sayisi_bulma:
+            uzmanlik_sayisi_bulma[uzmanlik] += 1
+        else:
+            uzmanlik_sayisi_bulma[uzmanlik] = 1
+print("\n")
+
+print('\033[1m' + 'Sistemde Yer Alan Doktorların Uzmanlık Alanları ve Kişi Sayısı' + '\033[0m')
+print(uzmanlik_sayisi_bulma)
+print("\n")
+
+print('\033[1m' + 'Deneyim Yılı 5ten Fazla Olan Doktorlar' + '\033[0m')
+yapi['Deneyim Yılı'] = pd.to_numeric(yapi['Deneyim Yılı'])
+deneyimli_doktorlar = yapi[(yapi['Deneyim Yılı'] > 5) & (yapi['Uzmanlık'] != 0)]
+print(deneyimli_doktorlar)
+
+
+yapi['Maaş'] = pd.to_numeric(yapi['Maaş'])     
+yedi_yüzden_büyük_maas =  yapi[yapi['Maaş'] > 7000]
+print('\033[1m' + 'Maaşı 7000den büyük kişiler' + '\033[0m')
+print(yedi_yüzden_büyük_maas)
+print("\n")
+
+
+print('\033[1m' + '1990dan Sonra Doğan Hastalar' + '\033[0m')
+dogum_yili = []
+
+for tarih in yapi['Doğum Tarihi']:
+    if tarih != 0:
+        parcalanmis = str(tarih).split(".")
+        dogum_yili.append(int(parcalanmis[2]))
+    else:
+        dogum_yili.append(0)
+
+yapi['Doğum Yılı'] = dogum_yili
+
+gencler = yapi[(yapi['Doğum Yılı'] >= 1990) & (yapi['Doğum Yılı'] != 0)]
+print(gencler)
+    
+
+
+print('\033[1m' + 'Adı Alfabetik Biçimde Sıralama' + '\033[0m')
+
+secilen=yapi.iloc[8:11]
+
+ad_siralama = secilen.sort_values('Ad')
+
+print(ad_siralama)
+print("\n")
+
+yeni_yapi = yapi[['Ad', 'Soyad', 'Departman', 'Maaş', 'Uzmanlık', 'Deneyim Yılı','Hastalik','Tedavi']]
+
+
+print('\033[1m' + 'Yeni Data Frame Üretimi' + '\033[0m')
+print(yeni_yapi)
+
+
+        
+        
+        
+
+
+
+
+
+
+    
+    

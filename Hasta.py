@@ -49,28 +49,30 @@ class Hasta():
         return self.__tedavi
     
     def __str__(self):
-        return f"Hasta No: {self.get_hasta_no()} Ad: {self.get_ad()} Soyad: {self.get_soyad()} Doğum Tarihi: {self.get_dogum_tarihi()} Hastalık: {self.get_hastalik()} Tedavi: {self.get_tedavi()}"
+        return f"Hasta No: {self.get_hasta_no()}, Ad: {self.get_ad()}, Soyad: {self.get_soyad()}, Doğum Tarihi: {self.get_dogum_tarihi()}, Hastalık: {self.get_hastalik()}, Tedavi: {self.get_tedavi()}, Tedavi süresi: {self.tedavi_suresi()}"
     
 
-    def tedavi_suresi(self, tedavi, hastalik):
+    def tedavi_suresi(self):
         tedavi_sure_sayaci=0
         bir_kez_dondur=1
         try:
             while bir_kez_dondur==1:
-                if hastalik=="Bulaşıcı Hastalık":
+                if self.get_hastalik()=="Bulaşıcı Hastalık":
                     tedavi_sure_sayaci=tedavi_sure_sayaci+4
-                elif hastalik=="Cilt Hastalığı":
+                elif self.get_hastalik()=="Cilt Hastalığı":
                     tedavi_sure_sayaci=tedavi_sure_sayaci+14
-                elif hastalik=="Akut Hastalığı":
+                elif self.get_hastalik()=="Akut Hastalık":
                     tedavi_sure_sayaci=tedavi_sure_sayaci+7
 
                 bir_kez_dondur=bir_kez_dondur+1
             
-            if tedavi=="Özel Tedavi":
+            if self.get_tedavi()=="Özel Tedavi":
                 tedavi_sure_sayaci=tedavi_sure_sayaci+10
             
-            if tedavi=="Normal Tedavi":
+            if self.get_tedavi()=="Normal Tedavi":
                 tedavi_sure_sayaci=tedavi_sure_sayaci+2
+
+            return tedavi_sure_sayaci
         except Exception as e:
             print("Tedavi süresi hesaplanırken bir hata oluştu", e)
 
