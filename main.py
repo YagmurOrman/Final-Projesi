@@ -16,37 +16,37 @@ print('\033[1m' + 'Sağlık Personeli Yönetim Sistemi' + '\033[0m')
 print("\n \n ")
 
 personel=Personel.Personel("788", "Ekin" , "Sözüçetin", "Temizlik Personeli", "4000")
-print(str(personel))
+print(personel)
 
 personel1=Personel.Personel("752", "Sevgi", "Ural", "Kat Sekreteri",  "4350")
-print(str(personel1))
+print(personel1)
 
 doktor=Doktor.Doktor("5247", "Taner Batı", "Cambaz", "Cerrahi", "28000", "Kalp Damar", "12", "Yıldız Özel Hastanesi")
-print(str(doktor))
+print(doktor)
 
 doktor1=Doktor.Doktor("5786", "Selinay", "Doğan", "Dermatoloji", "18750", "Dermatoloji"," 3 ", "Devlet Hastanesi")
-print(str(doktor1))
+print(doktor1)
 
 doktor2=Doktor.Doktor("5842", "Batuhan", "Durmaz", "Cerrahi", "20000" , "Genel Cerrahi", "18", "Tunguz Bayar Hastanesi")
-print(str(doktor2))
+print(doktor2)
 
 hemsire=Hemsire.Hemsire("4245", "Aşkın", "Yavuzalp", "Ortopedi", "6500", "45" ,"Okul Hemşireliği", "Tuğkan Çavuşoğlu Hastanesi")
-print(str(hemsire))
+print(hemsire)
 
 hemsire1=Hemsire.Hemsire("4587", "Damla", "Yılmaz","Pediatri", "3500", "35", "Yoğun Bakım" ,"Devlet Hastanesi")
-print(str(hemsire1))
+print(hemsire1)
 
 hemsire2=Hemsire.Hemsire("4558", "Sanem", "Dalgakıran", "Yenidoğan Yoğun Bakım", "4000", "38", "CNOR", "Kemal Kırımçak Devlet Hastanesi")
-print(str(hemsire2))
+print(hemsire2)
 
 hasta=Hasta.Hasta("6602","Gökalp", "Kandemir", "26.02.1998", "Bulaşıcı Hastalık", "Normal Tedavi")
-print(str(hasta))
+print(hasta)
 
 hasta1=Hasta.Hasta("6500", "Okan Tuna", "Naldöken", "23.11.2011", "Cilt Hastalığı", "Özel Tedavi")
-print(str(hasta1))
+print(hasta1)
 
 hasta2=Hasta.Hasta("6248", "Mutlu Savaş", "Dümen", "12.07.1955", "Akut Hastalık", "Normal Tedavi")
-print(str(hasta2))
+print(hasta2)
 print("\n")
 
 kisisel_veriler = {
