@@ -93,15 +93,18 @@ except Exception as e:
     print("DataFrame oluşturulurken bir hata oluştu:", e)
 
 uzmanlik_sayisi_bulma = {}
+try:
+    for index, row in yapi.iterrows():
+        if row['Uzmanlık'] != 0:
+            uzmanlik = row['Uzmanlık']
+            if uzmanlik in uzmanlik_sayisi_bulma:
+                uzmanlik_sayisi_bulma[uzmanlik] += 1
+            else:
+                uzmanlik_sayisi_bulma[uzmanlik] = 1
+    print("\n")
 
-for index, row in yapi.iterrows():
-    if row['Uzmanlık'] != 0:
-        uzmanlik = row['Uzmanlık']
-        if uzmanlik in uzmanlik_sayisi_bulma:
-            uzmanlik_sayisi_bulma[uzmanlik] += 1
-        else:
-            uzmanlik_sayisi_bulma[uzmanlik] = 1
-print("\n")
+except:
+    print("Uzmanlık alanına göre doktorlar ayırılamamıştır.")
 
 print('\033[1m' + 'Sistemde Yer Alan Doktorların Uzmanlık Alanları ve Kişi Sayısı' + '\033[0m')
 print(uzmanlik_sayisi_bulma)
@@ -135,16 +138,19 @@ yapi['Doğum Yılı'] = dogum_yili
 gencler = yapi[(yapi['Doğum Yılı'] >= 1990) & (yapi['Doğum Yılı'] != 0)]
 print(gencler)
     
+try:
 
+    print('\033[1m' + 'Adı Alfabetik Biçimde Sıralama' + '\033[0m')
 
-print('\033[1m' + 'Adı Alfabetik Biçimde Sıralama' + '\033[0m')
+    secilen=yapi.iloc[8:11]
 
-secilen=yapi.iloc[8:11]
+    ad_siralama = secilen.sort_values('Ad')
 
-ad_siralama = secilen.sort_values('Ad')
+    print(ad_siralama)
+    print("\n")
 
-print(ad_siralama)
-print("\n")
+except:
+    print("Adlar Alfabetik Olarak Sıralanamamıştır.")
 
 yeni_yapi = yapi[['Ad', 'Soyad', 'Departman', 'Maaş', 'Uzmanlık', 'Deneyim Yılı','Hastalik','Tedavi']]
 
