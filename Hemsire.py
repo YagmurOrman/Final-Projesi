@@ -26,11 +26,13 @@ class Hemsire(Personel.Personel):
 
     def get_hastane(self):
         return self.__hastane
+    
+    def maas_artirir(self):
+        maas_arttirma_orani=15
+        yeni_maas=int(self.get_maas())*(1+maas_arttirma_orani/100)
+        return yeni_maas
         
     def __str__(self):
-        return f"{super().__str__()}, Calışma Saati: {self.__calisma_saati}, Sertifika: {self.__sertifika}, Hastane: {self.__hastane}"
+        return f"{super().__str__()}, Calışma Saati: {self.__calisma_saati}, Sertifika: {self.__sertifika}, Hastane: {self.__hastane},  Maaş artışı sonucu oluşan maaş: {self.maas_artirir()}"
         
-    def maas_artirir(self):
-        maas=int(self.get__maas)
-        maas_arttirma_orani=25
-        yeni_maas=maas*(1+maas_arttirma_orani/100)
+    

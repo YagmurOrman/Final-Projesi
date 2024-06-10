@@ -102,24 +102,29 @@ try:
             else:
                 uzmanlik_sayisi_bulma[uzmanlik] = 1
     print("\n")
-
+    print('\033[1m' + 'Sistemde Yer Alan Doktorların Uzmanlık Alanları ve Kişi Sayısı' + '\033[0m')
+    print(uzmanlik_sayisi_bulma)
+    print("\n")
 except:
     print("Uzmanlık alanına göre doktorlar ayırılamamıştır.")
 
-print('\033[1m' + 'Sistemde Yer Alan Doktorların Uzmanlık Alanları ve Kişi Sayısı' + '\033[0m')
-print(uzmanlik_sayisi_bulma)
-print("\n")
+
 
 print('\033[1m' + 'Deneyim Yılı 5ten Fazla Olan Doktorlar' + '\033[0m')
 yapi['Deneyim Yılı'] = pd.to_numeric(yapi['Deneyim Yılı'])
 deneyimli_doktorlar = yapi[(yapi['Deneyim Yılı'] > 5) & (yapi['Uzmanlık'] != 0)]
 print(deneyimli_doktorlar)
+uzunluk=len(deneyimli_doktorlar)
+print("\n")
+print(f"Deneyim Yılı 5'ten Fazla Olan Doktorların Sayısı ==> {uzunluk}")
+
+print("\n")
 
 
 yapi['Maaş'] = pd.to_numeric(yapi['Maaş'])     
-yedi_yüzden_büyük_maas =  yapi[yapi['Maaş'] > 7000]
-print('\033[1m' + 'Maaşı 7000den büyük kişiler' + '\033[0m')
-print(yedi_yüzden_büyük_maas)
+yedi_binden_büyük_maas =  yapi[yapi['Maaş'] > 7000]
+print('\033[1m' + 'Maaşı 7000den Büyük Kişiler' + '\033[0m')
+print(yedi_binden_büyük_maas)
 print("\n")
 
 
@@ -137,10 +142,11 @@ yapi['Doğum Yılı'] = dogum_yili
 
 gencler = yapi[(yapi['Doğum Yılı'] >= 1990) & (yapi['Doğum Yılı'] != 0)]
 print(gencler)
+print("\n")
     
 try:
 
-    print('\033[1m' + 'Adı Alfabetik Biçimde Sıralama' + '\033[0m')
+    print('\033[1m' + 'Hasta Adı Alfabetik Biçimde Sıralama' + '\033[0m')
 
     secilen=yapi.iloc[8:11]
 
