@@ -6,7 +6,7 @@ import Hasta
 import Hemsire
 import Doktor
 
-#BİR SONRAKİ DÜZENLEMEDE TRY EXCEPT YAPILARI EKLENECEK
+
 
 
 print("\n")
@@ -106,43 +106,51 @@ try:
     print(uzmanlik_sayisi_bulma)
     print("\n")
 except:
-    print("Uzmanlık alanına göre doktorlar ayırılamamıştır.")
+    print("Uzmanlık alanına göre doktorlar ayrılamamıştır.")
 
 
+try:
+    print('\033[1m' + 'Deneyim Yılı 5ten Fazla Olan Doktorlar' + '\033[0m')
+    yapi['Deneyim Yılı'] = pd.to_numeric(yapi['Deneyim Yılı'])
+    deneyimli_doktorlar = yapi[(yapi['Deneyim Yılı'] > 5) & (yapi['Uzmanlık'] != 0)]
+    print(deneyimli_doktorlar)
+    uzunluk=len(deneyimli_doktorlar)
+    print("\n")
+    print(f"Deneyim Yılı 5'ten Fazla Olan Doktorların Sayısı: {uzunluk}")
 
-print('\033[1m' + 'Deneyim Yılı 5ten Fazla Olan Doktorlar' + '\033[0m')
-yapi['Deneyim Yılı'] = pd.to_numeric(yapi['Deneyim Yılı'])
-deneyimli_doktorlar = yapi[(yapi['Deneyim Yılı'] > 5) & (yapi['Uzmanlık'] != 0)]
-print(deneyimli_doktorlar)
-uzunluk=len(deneyimli_doktorlar)
-print("\n")
-print(f"Deneyim Yılı 5'ten Fazla Olan Doktorların Sayısı ==> {uzunluk}")
+except Exception as e:
+    print("Deneyim yılı 5'ten fazla olan doktorlar yazdırılamamıştır. Alınan hata:", e)
 
-print("\n")
-
-
-yapi['Maaş'] = pd.to_numeric(yapi['Maaş'])     
-yedi_binden_büyük_maas =  yapi[yapi['Maaş'] > 7000]
-print('\033[1m' + 'Maaşı 7000den Büyük Kişiler' + '\033[0m')
-print(yedi_binden_büyük_maas)
 print("\n")
 
+try:
+    yapi['Maaş'] = pd.to_numeric(yapi['Maaş'])     
+    yedi_binden_büyük_maas =  yapi[yapi['Maaş'] > 7000]
+    print('\033[1m' + 'Maaşı 7000den Büyük Kişiler' + '\033[0m')
+    print(yedi_binden_büyük_maas)
 
-print('\033[1m' + '1990dan Sonra Doğan Hastalar' + '\033[0m')
-dogum_yili = []
-
-for tarih in yapi['Doğum Tarihi']:
-    if tarih != 0:
-        parcalanmis = str(tarih).split(".")
-        dogum_yili.append(int(parcalanmis[2]))
-    else:
-        dogum_yili.append(0)
-
-yapi['Doğum Yılı'] = dogum_yili
-
-gencler = yapi[(yapi['Doğum Yılı'] >= 1990) & (yapi['Doğum Yılı'] != 0)]
-print(gencler)
+except Exception as e:
+    print("Maaşı 7000'den büyük kişiler oluşturulurken bir hata oluştu: ", e)
 print("\n")
+
+try:
+    print('\033[1m' + '1990dan Sonra Doğan Hastalar' + '\033[0m')
+    dogum_yili = []
+
+    for tarih in yapi['Doğum Tarihi']:
+        if tarih != 0:
+            parcalanmis = str(tarih).split(".")
+            dogum_yili.append(int(parcalanmis[2]))
+        else:
+            dogum_yili.append(0)
+
+    yapi['Doğum Yılı'] = dogum_yili
+
+    gencler = yapi[(yapi['Doğum Yılı'] >= 1990) & (yapi['Doğum Yılı'] != 0)]
+    print(gencler)
+    print("\n")
+except Exception as e:
+    print("1990'dan sonra doğan hastaları bulurken bir hata oluştur:", e)
     
 try:
 
