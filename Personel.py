@@ -2,13 +2,14 @@
 
 class Personel:
     def __init__(self,personel_no, ad, soyad, departman, maas):
+        #Değişkenler private tanımlanır
         self.__personel_no=personel_no
         self.__ad=ad
         self.__soyad=soyad
         self.__departman=departman
         self.__maas=maas
 
-    
+# getter ve setter metodları yardımıyla private verilere erişim sağlanır  
     def set_personel_no(self, personel_no):
         self.__personel_no=personel_no
 
@@ -43,5 +44,5 @@ class Personel:
     def get_maas(self):
         return self.__maas
     
-    def __str__(self):
+    def __str__(self):#Ekrana yazdırma işlemi için kullanılır
         return f"Personel No: {self.__personel_no}, Adı: {self.__ad}, Soyadı: {self.__soyad}, Departmanı: {self.__departman}, Maaşı: {self.__maas}"

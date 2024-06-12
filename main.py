@@ -84,7 +84,7 @@ kisisel_veriler = {
 
     "Tedavi":[np.nan,  np.nan, np.nan, np.nan ,np.nan ,np.nan , np.nan, np.nan, hasta.get_tedavi(), hasta1.get_tedavi(), hasta2.get_tedavi()]
 
-}
+}# Boş değerlere np.nan girilmiştir
 
 try:
     yapi = pd.DataFrame(kisisel_veriler).fillna(0)#Data Frame'i Oluşturma, boş verileri 0'la doldurma
@@ -92,7 +92,7 @@ try:
 except Exception as e:
     print("DataFrame oluşturulurken bir hata oluştu:", e)
 
-uzmanlik_sayisi_bulma = {}
+uzmanlik_sayisi_bulma = {}#Uzmanlık sayısı hesabı için dictionary oluşturulmuş
  
 #Kodun Buradan Sonraki Kısmı Data Frame'i Özelliklerine Ayırma Bölümlerini İçermektedir
 try:#Uzmanlığa göre doktor ayırma
@@ -113,9 +113,9 @@ except:
 
 try:#Deneyim Yılı 5'ten Fazla Olan Kişiler
     print('\033[1m' + 'Deneyim Yılı 5ten Fazla Olan Doktorlar' + '\033[0m')
-    yapi['Deneyim Yılı'] = pd.to_numeric(yapi['Deneyim Yılı'])
+    yapi['Deneyim Yılı'] = pd.to_numeric(yapi['Deneyim Yılı'])#str yapısı sayısal bir değere çevrilmiş
     deneyimli_doktorlar = yapi[(yapi['Deneyim Yılı'] > 5) & (yapi['Uzmanlık'] != 0)]
-    print(deneyimli_doktorlar)
+    print(deneyimli_doktorlar)#İlgili Data Frame bölümleri ekrana yazdırılıyor
     uzunluk=len(deneyimli_doktorlar)
     print("\n")
     print(f"Deneyim Yılı 5'ten Fazla Olan Doktorların Sayısı: {uzunluk}")
@@ -126,7 +126,7 @@ except Exception as e:
 print("\n")
 
 try:
-    yapi['Maaş'] = pd.to_numeric(yapi['Maaş'])     
+    yapi['Maaş'] = pd.to_numeric(yapi['Maaş'])#str yapısı sayısal bir değere çevrilmiş     
     yedi_binden_büyük_maas =  yapi[yapi['Maaş'] > 7000]
     print('\033[1m' + 'Maaşı 7000den Büyük Kişiler' + '\033[0m')
     print(yedi_binden_büyük_maas)
@@ -158,7 +158,7 @@ try:
 
     print('\033[1m' + 'Hasta Adı Alfabetik Biçimde Sıralama' + '\033[0m')
 
-    secilen=yapi.iloc[8:11]
+    secilen=yapi.iloc[8:11]#Data Frame'de yer alan 8-11 arası satırları seçer
 
     ad_siralama = secilen.sort_values('Ad')
 
@@ -168,7 +168,7 @@ try:
 except:
     print("Adlar Alfabetik Olarak Sıralanamamıştır.")
 
-yeni_yapi = yapi[['Ad', 'Soyad', 'Departman', 'Maaş', 'Uzmanlık', 'Deneyim Yılı','Hastalik','Tedavi']]
+yeni_yapi = yapi[['Ad', 'Soyad', 'Departman', 'Maaş', 'Uzmanlık', 'Deneyim Yılı','Hastalik','Tedavi']]#Seçili başlıklardan yeni Data Frame oluşturuluyor
 
 
 print('\033[1m' + 'Yeni Data Frame Üretimi' + '\033[0m')

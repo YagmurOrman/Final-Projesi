@@ -1,12 +1,13 @@
 class Hasta():
     def __init__(self,hasta_no, ad, soyad, dogum_tarihi, hastalik, tedavi):
+        #Değişkenler private tanımlanır
         self.__hasta_no=hasta_no
         self.__ad=ad
         self.__soyad=soyad
         self.__dogum_tarihi=dogum_tarihi
         self.__hastalik=hastalik
         self.__tedavi=tedavi
-
+# getter ve setter metodları yardımıyla private verilere erişim sağlanır
     def set_hasta_no(self,hasta_no):
         self.__hasta_no=hasta_no
     
@@ -48,23 +49,21 @@ class Hasta():
     def get_tedavi(self):
         return self.__tedavi
     
-    def __str__(self):
+    def __str__(self):#Ekrana yazdırma işlemi için kullanılır
         return f"Hasta No: {self.get_hasta_no()}, Ad: {self.get_ad()}, Soyad: {self.get_soyad()}, Doğum Tarihi: {self.get_dogum_tarihi()}, Hastalık: {self.get_hastalik()}, Tedavi: {self.get_tedavi()}, Tedavi süresi: {self.tedavi_suresi()}"
     
 
-    def tedavi_suresi(self):
+    def tedavi_suresi(self):#Hastalığın Türüne Tedavi Biçimine Göre Hastanın Tedavi Süresi Hesaplanır
         tedavi_sure_sayaci=0
-        bir_kez_dondur=1
         try:
-            while bir_kez_dondur==1:
-                if self.get_hastalik()=="Bulaşıcı Hastalık":
-                    tedavi_sure_sayaci=tedavi_sure_sayaci+4
-                elif self.get_hastalik()=="Cilt Hastalığı":
-                    tedavi_sure_sayaci=tedavi_sure_sayaci+14
-                elif self.get_hastalik()=="Akut Hastalık":
-                    tedavi_sure_sayaci=tedavi_sure_sayaci+7
+        
+            if self.get_hastalik()=="Bulaşıcı Hastalık":
+                tedavi_sure_sayaci=tedavi_sure_sayaci+4
+            elif self.get_hastalik()=="Cilt Hastalığı":
+                tedavi_sure_sayaci=tedavi_sure_sayaci+14
+            elif self.get_hastalik()=="Akut Hastalık":
+                tedavi_sure_sayaci=tedavi_sure_sayaci+7
 
-                bir_kez_dondur=bir_kez_dondur+1
             
             if self.get_tedavi()=="Özel Tedavi":
                 tedavi_sure_sayaci=tedavi_sure_sayaci+10
