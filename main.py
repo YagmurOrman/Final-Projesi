@@ -13,7 +13,7 @@ print("\n")
 print('\033[1m' + 'Sağlık Personeli Yönetim Sistemi' + '\033[0m')
 
 print("\n \n ")
-
+#Nesnelerin Oluşturulduğu Kısım
 personel=Personel.Personel("788", "Ekin" , "Sözüçetin", "Temizlik Personeli", "4000")
 print(personel)
 
@@ -48,6 +48,7 @@ hasta2=Hasta.Hasta("6248", "Mutlu Savaş", "Dümen", "12.07.1955", "Akut Hastal�
 print(hasta2)
 print("\n")
 
+#Data Frame'de Kullanılacak Veriler
 kisisel_veriler = {
     "Personel No": [personel.get_personel_no(), personel1.get_personel_no(), doktor.get_personel_no(), doktor1.get_personel_no(),
                     doktor2.get_personel_no(), hemsire.get_personel_no(), hemsire1.get_personel_no(), hemsire2.get_personel_no(), np.nan,np.nan ,np.nan],
@@ -86,13 +87,15 @@ kisisel_veriler = {
 }
 
 try:
-    yapi = pd.DataFrame(kisisel_veriler).fillna(0)
+    yapi = pd.DataFrame(kisisel_veriler).fillna(0)#Data Frame'i Oluşturma, boş verileri 0'la doldurma
     print(yapi)
 except Exception as e:
     print("DataFrame oluşturulurken bir hata oluştu:", e)
 
 uzmanlik_sayisi_bulma = {}
-try:
+ 
+#Kodun Buradan Sonraki Kısmı Data Frame'i Özelliklerine Ayırma Bölümlerini İçermektedir
+try:#Uzmanlığa göre doktor ayırma
     for index, row in yapi.iterrows():
         if row['Uzmanlık'] != 0:
             uzmanlik = row['Uzmanlık']
@@ -108,7 +111,7 @@ except:
     print("Uzmanlık alanına göre doktorlar ayrılamamıştır.")
 
 
-try:
+try:#Deneyim Yılı 5'ten Fazla Olan Kişiler
     print('\033[1m' + 'Deneyim Yılı 5ten Fazla Olan Doktorlar' + '\033[0m')
     yapi['Deneyim Yılı'] = pd.to_numeric(yapi['Deneyim Yılı'])
     deneyimli_doktorlar = yapi[(yapi['Deneyim Yılı'] > 5) & (yapi['Uzmanlık'] != 0)]
@@ -132,7 +135,7 @@ except Exception as e:
     print("Maaşı 7000'den büyük kişiler oluşturulurken bir hata oluştu: ", e)
 print("\n")
 
-try:
+try:#Genç Hastalar Bulunuyor
     print('\033[1m' + '1990dan Sonra Doğan Hastalar' + '\033[0m')
     dogum_yili = []
 
